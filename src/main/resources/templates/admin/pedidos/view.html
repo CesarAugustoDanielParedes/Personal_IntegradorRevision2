@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Detalle Pedido: ' + ${pedido.numero} + ' | AlphaBike Admin'"></title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <div class="container">
+        <h2 th:text="'Detalle del Pedido: ' + ${pedido.numero}">Detalle del Pedido</h2>
+
+        <div class="order-details">
+            <h3>Información del Cliente</h3>
+            <p><strong>Nombre:</strong> <span th:text="${pedido.cliente.nombre} + ' ' + ${pedido.cliente.apellido}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${pedido.cliente.email}"></span></p>
+            <p><strong>Dirección:</strong> <span th:text="${pedido.cliente.direccion}"></span></p>
+            <p><strong>Teléfono:</strong> <span th:text="${pedido.cliente.telefono}"></span></p>
+            
+            <h3>Detalles del Pedido</h3>
+            <p><strong>Fecha:</strong> <span th:text="${#temporals.format(pedido.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></span></p>
+            <p><strong>Total:</strong> <span th:text="${#numbers.formatCurrency(pedido.total)}"></span></p>
+            
+            <h3>Productos Comprados</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="detalle : ${pedido.detalles}">
+                        <td th:text="${detalle.nombre}"></td>
+                        <td th:text="${detalle.cantidad}"></td>
+                        <td th:text="${#numbers.formatCurrency(detalle.precio)}"></td>
+                        <td th:text="${#numbers.formatCurrency(detalle.total)}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Total Final:</strong> <span th:text="${#numbers.formatCurrency(pedido.total)}"></span></p>
+        </div>
+        
+        <a th:href="@{/admin/pedidos}">Volver a la Lista de Pedidos</a>
+    </div>
+</body>
+</html>

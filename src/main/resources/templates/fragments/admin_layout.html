@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} + ' | AlphaBike Admin'"></title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"> 
+    <link rel="icon" th:href="@{/images/media/logoalphabike.png}" type="image/x-icon">
+</head>
+
+<body>
+    
+    <div class="panel-container">
+        <div th:replace="~{fragments/admin_sidebar :: sidebar-content}"></div>
+        
+        <main class="main-content">
+            <header class="topbar">
+                <div class="user-info">
+                    <span>Bienvenido, </span>
+                    <strong sec:authentication="name">Administrador</strong>
+                </div>
+            </header>
+            
+            <div class="content-area" id="contentArea">
+                <div th:replace="${contentFragment}"></div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

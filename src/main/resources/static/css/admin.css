@@ -1,0 +1,323 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Fondo suave */
+}
+
+/* Contenedor principal (Sidebar + Main Content) */
+.panel-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 1. BARRA LATERAL (SIDEBAR) */
+.sidebar {
+    width: 250px;
+    background-color: #0a1a2f; /* Azul oscuro corporativo */
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-admin {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-admin img {
+    width: 60px;
+    height: auto;
+    filter: brightness(0) invert(1); /* Hace que el logo se vea blanco */
+}
+
+.logo-admin h3 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    color: #f4f7f6;
+}
+
+.sidebar-menu {
+    flex-grow: 1;
+}
+
+.menu-item {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #ccc;
+    transition: background 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background-color: #003366; /* Azul más claro */
+    color: #fff;
+    border-left: 5px solid #f44336; /* Línea de enfoque (Rojo) */
+    padding-left: 15px;
+}
+
+.sidebar hr {
+    border: none;
+    border-top: 1px solid #1f375a;
+    margin: 10px 20px;
+}
+
+/* Sección de Cerrar Sesión */
+.logout-section {
+    padding: 20px;
+    border-top: 1px solid #1f375a;
+}
+
+.btn-logout {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #f44336; /* Rojo para acción de peligro */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background-color: #d32f2f;
+}
+
+/* 2. CONTENIDO PRINCIPAL */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    padding: 15px 30px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    text-align: right;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.user-info strong {
+    color: #003366;
+}
+
+.content-area {
+    padding: 30px;
+}
+
+.content-area h2 {
+    color: #0a1a2f;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Tablas y Botones de Gestión (Para los módulos) --- */
+
+.content-area table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-area th, .content-area td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.content-area th {
+    background-color: #003366; /* Azul Oscuro */
+    color: white;
+    text-transform: uppercase;
+}
+
+.content-area tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* --- Estilos para Botones de Acción (CRUD) --- */
+.action-buttons button, .btn-activate {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-decoration: none; /* Asegura que los <a> se vean como botones */
+    transition: background 0.2s;
+}
+
+.btn-edit { background-color: #007bff; color: white; } /* Azul */
+.btn-delete { background-color: #dc3545; color: white; } /* Rojo */
+.btn-activate { background-color: #28a745; color: white; } /* Verde para Agregar/Activar */
+
+/* --- Estilos para el Buscador y Formulario --- */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+.product-form input[type="text"], 
+.product-form input[type="number"],
+.product-form textarea,
+.product-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.product-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+        padding: 10px 0;
+    }
+    .sidebar h3,
+    .sidebar p,
+    .logo-admin img { /* Oculta el texto y el logo en móvil para ahorrar espacio */
+        display: none; 
+    }
+    .menu-item {
+        text-align: center;
+        padding: 15px 5px;
+        font-size: 0.8rem;
+    }
+    .menu-item:hover,
+    .menu-item.active {
+        border-left: none;
+        border-bottom: 3px solid #f44336;
+        padding-left: 5px;
+    }
+    .topbar {
+        text-align: center;
+    }
+    .content-area table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+/* --- Estilos para la Tarjeta de Registro y Login --- */
+
+/* Estilo para el contenedor general del formulario */
+.container {
+    /* Asegurar que el contenedor principal use Flexbox para centrar o usar el padding adecuado */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container h2 {
+    color: #0a1a2f; /* Azul oscuro */
+    margin-bottom: 25px;
+    border-bottom: 2px solid #f44336; /* Línea de enfoque roja */
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Estilo para los inputs y selects */
+.container label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.container input:focus {
+    border-color: #003366; /* Azul de enfoque */
+    outline: none;
+}
+
+/* Estilo para el botón principal (Crear Cuenta) */
+.container button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 30px;
+    background-color: #28a745; /* Verde para acción de "Crear" */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.container button[type="submit"]:hover {
+    background-color: #1e873a;
+    transform: translateY(-1px);
+}
+
+/* Estilos de Alerta/Mensajes */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+/* Estilos para enlaces de navegación */
+.container p a {
+    color: #007bff; /* Azul estándar para links */
+    text-decoration: none;
+}
+
+.container p a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}

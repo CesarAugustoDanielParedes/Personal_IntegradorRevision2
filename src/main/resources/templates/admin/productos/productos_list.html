@@ -1,0 +1,46 @@
+<div th:fragment="content">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 th:text="${pageTitle}">Gestión de Productos</h2> 
+        <a th:href="@{/admin/productos/create}" class="btn-activate" style="text-decoration: none;">+ Añadir Nuevo Producto</a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar producto por nombre o ID...">
+        <button class="btn-search">Buscar</button>
+    </div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.id}">1</td>
+                <td>
+                    <img th:src="@{/images/productos/{img}(img=${producto.imagen})}" style="width: 50px; height: 50px; object-fit: cover;">
+                </td>
+                <td th:text="${producto.nombre}">Bicicleta Montaña X</td>
+                
+                <td th:text="${producto.marca?.nombre}">Sin Marca</td> 
+                <td th:text="${producto.categoria?.nombre}">Sin Categoría</td>
+                
+                <td th:text="${producto.stock}">10</td>
+                <td th:text="${#numbers.formatCurrency(producto.precio)}">$599.99</td>
+                <td class="action-buttons">
+                    <a th:href="@{/admin/productos/edit/{id}(id=${producto.id})}" class="btn-edit">Editar</a>
+                    <a th:href="@{/admin/productos/delete/{id}(id=${producto.id})}" class="btn-delete">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

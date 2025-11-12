@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Marca | AlphaBike Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <div class="container">
+        <h2>Crear Nueva Marca</h2>
+
+        <form th:action="@{/admin/marcas/save}" method="post" th:object="${marca}">
+            
+            <input type="hidden" th:field="*{id}"> <label for="nombre">Nombre de la Marca:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
+            
+            <button type="submit">Guardar Marca</button>
+            <a th:href="@{/admin/marcas}">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacto | AlphaBike</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .contact-info {
+            background-color: var(--color-secondary);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .contact-form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Asegura que el padding no cambie el width */
+        }
+        .contact-form textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        .contact-form button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: main-header}"></div>
+    
+    <div class="container" style="padding: 40px 0;">
+        <h1>Contáctanos</h1>
+        <p>Estamos aquí para responder tus preguntas sobre bicicletas, accesorios y pedidos.</p>
+        
+        <div class="contact-info">
+            <h3>Información de AlphaBike</h3>
+            <p><strong>Dirección Central:</strong> Av. Las Bicicletas #123, Ciudad del Pedal.</p>
+            <p><strong>Teléfono:</strong> +51 987 654 321</p>
+            <p><strong>Email:</strong> contacto@alphabike.com</p>
+            <p><strong>Horario de Atención:</strong> Lunes a Viernes, 9:00 AM - 6:00 PM</p>
+        </div>
+
+        <div class="contact-form">
+            <h3>Envíanos un Mensaje</h3>
+            <form action="#" method="post"> 
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="asunto">Asunto:</label>
+                <input type="text" id="asunto" name="asunto" required>
+
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+                
+                <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

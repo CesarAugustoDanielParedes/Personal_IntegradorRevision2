@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:fragment="main-header" class="navbar">
+    <div class="logo">
+        <a th:href="@{/}">
+            <img th:src="@{/images/media/logoalphabike.png}" alt="AlphaBike Logo">
+        </a>
+    </div>
+
+    <nav class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/productos}">Productos</a>
+        <a th:href="@{/contacto}">Contacto</a>
+        <a th:href="@{/admin/panel}" sec:authorize="hasRole('ADMIN')">Panel Admin</a>
+    </nav>
+
+    <div class="search">
+        <input type="text" placeholder="Buscar...">
+        <button>🔍</button>
+    </div>
+
+    <div class="actions">
+        
+        <a th:href="@{/carrito}" class="cart">🛒</a>
+
+        <div sec:authorize="isAuthenticated()">
+            <div th:with="userEmail=${#authentication.principal.username}"> 
+                
+                <div class="usuario-logueado user-dropdown-toggle"> 
+                    <div class="usuario-circular">
+                        <span th:text="${#strings.toUpperCase(#strings.substring(userEmail, 0, 1))}">A</span>
+                    </div>
+                    <span class="usuario-nombre" th:text="${userEmail}">user@email.com</span>
+                    
+                    <div id="userDropdown" class="dropdown hidden">
+                        <a th:href="@{/perfil}">Información de Perfil</a>
+                        <form th:action="@{/logout}" method="post" style="margin: 0;">
+                            <button type="submit">Cerrar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}" class="btn">
+                Ingresar / Registrarse
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

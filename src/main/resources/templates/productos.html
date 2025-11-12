@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos | AlphaBike</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Estilos específicos para el layout de filtros */
+        .catalogo-layout {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .filtro-sidebar {
+            width: 250px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky; /* Fija la barra al hacer scroll */
+            top: 20px;
+            height: fit-content;
+        }
+        .product-list-area {
+            flex-grow: 1;
+        }
+        .filtro-sidebar label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #0a1a2f;
+        }
+        .filtro-sidebar input, .filtro-sidebar select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-filter {
+            background-color: #d32f2f; 
+            color: white; 
+            margin-top: 20px; 
+            width: 100%;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        /* ... (el resto de estilos de producto-card, etc., se mantiene) ... */
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: main-header}"></div>
+    
+    <div class="container" style="padding: 40px 0;">
+        <h1>🚴 Catálogo de AlphaBike</h1>
+        
+        <div class="catalogo-layout">
+            
+            <div class="filtro-sidebar">
+                <h3>🔍 Opciones de Filtro</h3>
+                <form th:action="@{/productos}" method="get">
+                    
+                    <label for="search">Buscar Producto:</label>
+                    <input type="text" id="search" name="search" placeholder="Ej: Bicicleta Montaña" 
+                           th:value="${currentSearch}">
+                    
+                    <label for="marcaId">Marca:</label>
+                    <select id="marcaId" name="marcaId">
+                        <option value="">Todas las Marcas</option>
+                        <option th:each="marca : ${marcas}" 
+                                th:value="${marca.id}" 
+                                th:text="${marca.nombre}"
+                                th:selected="${currentMarca != null and currentMarca.equals(marca.id)}">
+                            Marca Ejemplo
+                        </option>
+                    </select>
+
+                    <label for="categoriaId">Categoría:</label>
+                    <select id="categoriaId" name="categoriaId">
+                        <option value="">Todas las Categorías</option>
+                        <option th:each="categoria : ${categorias}" 
+                                th:value="${categoria.id}" 
+                                th:text="${categoria.nombre}"
+                                th:selected="${currentCategoria != null and currentCategoria.equals(categoria.id)}">
+                            Categoría Ejemplo
+                        </option>
+                    </select>
+                    
+                    <label for="maxPrice">Precio Máximo ($):</label>
+                    <input type="number" id="maxPrice" name="maxPrice" min="0" step="0.01" 
+                           th:value="${currentMaxPrice}" placeholder="Ej: 800.00">
+                           
+                    <button type="submit" class="btn btn-filter">Aplicar Filtros</button>
+                    <a th:href="@{/productos}" class="btn" style="margin-top: 5px; background: #ccc; width: 100%;">Limpiar</a>
+                </form>
+            </div>
+            
+            <div class="product-list-area">
+                <div th:if="${productos.isEmpty()}" class="alert alert-info">
+                    No se encontraron productos con los criterios de búsqueda seleccionados.
+                </div>
+
+                <div th:unless="${productos.isEmpty()}" class="product-grid">
+                    <div th:each="producto : ${productos}" class="product-card">
+                        <img th:src="@{/images/productos/{img}(img=${producto.imagen})}" th:alt="${producto.nombre}">
+                        <h3 th:text="${producto.nombre}"></h3>
+                        <p>Marca: <strong th:text="${producto.marca?.nombre}"></strong></p>
+                        <p style="font-size: 1.5em; color: #d32f2f; font-weight: bold;">
+                            <span th:text="${#numbers.formatCurrency(producto.precio)}"></span>
+                        </p>
+                        <a th:href="@{/productos/{id}(id=${producto.id})}" class="btn btn-red">Ver Detalle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/footer :: main-footer}"></div>
+</body>
+</html>

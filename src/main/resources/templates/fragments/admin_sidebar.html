@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<aside th:fragment="sidebar-content" class="sidebar">
+    <div>
+        <div class="logo-admin">
+            <img th:src="@{/images/media/logoalphabike2.png}" alt="AlphaBike Admin Logo">
+            <h3>Management</h3>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <a th:href="@{/admin/panel}" class="menu-item" th:classappend="${activeMenu == 'dashboard' ? 'active' : ''}">
+                🏠 Dashboard
+            </a>
+            <hr> 
+            
+            <a th:href="@{/admin/productos}" class="menu-item" th:classappend="${activeMenu == 'productos' ? 'active' : ''}">
+                📦 Productos
+            </a>
+            <a th:href="@{/admin/pedidos}" class="menu-item" th:classappend="${activeMenu == 'pedidos' ? 'active' : ''}">
+                📜 Pedidos
+            </a>
+            <a th:href="@{/admin/clientes}" class="menu-item" th:classappend="${activeMenu == 'clientes' ? 'active' : ''}">
+                👥 Clientes
+            </a>
+            <a th:href="@{/admin/banners}" class="menu-item" th:classappend="${activeMenu == 'banners' ? 'active' : ''}">
+                🖼️ Banners
+            </a>
+            <hr>
+            
+            <a th:href="@{/admin/marcas}" class="menu-item" th:classappend="${activeMenu == 'marcas' ? 'active' : ''}">
+                🏷️ Marcas
+            </a>
+            <a th:href="@{/admin/categorias}" class="menu-item" th:classappend="${activeMenu == 'categorias' ? 'active' : ''}">
+                📂 Categorías
+            </a>
+        </nav>
+    </div>
+    
+    <div class="logout-section">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" id="logoutBtn" class="btn-logout">🔑 Cerrar Sesión</button>
+        </form>
+    </div>
+</aside>
+
+</body>
+</html>

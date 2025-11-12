@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout | AlphaBike</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h2>Checkout y Pago Final</h2>
+        
+        <h3>Datos de Envío</h3>
+        <p><strong>Cliente:</strong> <span th:text="${cliente.nombre} + ' ' + ${cliente.apellido}"></span></p>
+        <p><strong>Dirección:</strong> <span th:text="${cliente.direccion}"></span></p>
+        <p><strong>Teléfono:</strong> <span th:text="${cliente.telefono}"></span></p>
+        <hr>
+        
+        <h3>Resumen del Pedido</h3>
+        <table class="table">
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align: right;"><strong>TOTAL A PAGAR:</strong></td>
+                    <td th:text="${#numbers.formatCurrency(total)}"></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <hr>
+        
+        <h3>Selecciona Método de Pago</h3>
+        <form th:action="@{/carrito/confirmar-pago}" method="post">
+            
+            <label>
+                <input type="radio" name="metodoPago" value="tarjeta" required> Tarjeta de Débito/Crédito
+            </label>
+            <div class="payment-details" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+                <p>Simulación: Pago con Tarjeta</p>
+                <input type="text" placeholder="Número de Tarjeta" required>
+            </div>
+
+            <label>
+                <input type="radio" name="metodoPago" value="yape" required> Yape
+            </label>
+            <div class="payment-details" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                <p>Simulación: Pago con Yape (Sería mediante QR o número de teléfono)</p>
+                <input type="tel" placeholder="Número de Teléfono Yape" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Finalizar Compra y Pagar</button>
+        </form>
+    </div>
+</body>
+</html>

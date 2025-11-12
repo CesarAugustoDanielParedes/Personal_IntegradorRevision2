@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<footer th:fragment="main-footer" class="footer">
+    <div class="footer-container container">
+        
+        <div class="footer-left">
+            <img th:src="@{/images/media/logoalphabike.png}" alt="Alpha Bike Logo" class="footer-logo">
+            <h3>ALPHA BIKE</h3>
+            <p class="footer-desc">Tu tienda de confianza para todas tus necesidades de ciclismo</p>
+            <p>📍 Av. A Mz 190 Los Olivos - Lima - Perú</p>
+            <p>📞 +51 912 543 818</p>
+        </div>
+
+        <div class="footer-center">
+            <h4>Productos</h4>
+            <ul>
+                <li><a th:href="@{/productos}">Bicicletas de montaña</a></li>
+                <li><a th:href="@{/productos}">Bicicletas de ruta</a></li>
+                <li><a th:href="@{/productos}">Bicicletas eléctricas</a></li>
+                <li><a th:href="@{/productos}">Accesorios</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-right">
+            <h4>Horarios</h4>
+            <p>Lunes - Viernes: 8:00 am - 8:00 pm</p>
+            <p>Sábado: 8:00 am - 8:00 pm</p>
+
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><img th:src="@{/images/media/facebook.png}" alt="Facebook"></a>
+                <a href="#"><img th:src="@{/images/media/instagram.png}" alt="Instagram"></a>
+                <a href="#"><img th:src="@{/images/media/youtube.png}" alt="YouTube"></a>
+                <a href="#"><img th:src="@{/images/media/tiktok.png}" alt="TikTok"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 ALPHA BIKE. Todos los derechos reservados.</p>
+    </div>
+    
+    <a th:href="@{'https://wa.me/51912543818'}" class="whatsapp" target="_blank">
+        <img th:src="@{/images/media/wasap.png}" alt="WhatsApp">
+    </a>
+</footer>
+
+</body>
+</html>

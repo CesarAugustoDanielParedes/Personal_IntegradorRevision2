@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Editar Categoría: ' + ${categoria.nombre} + ' | AlphaBike Admin'"></title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <div class="container">
+        <h2 th:text="'Editar Categoría: ' + ${categoria.nombre}">Editar Categoría</h2>
+
+        <form th:action="@{/admin/categorias/save}" method="post" th:object="${categoria}">
+            
+            <input type="hidden" th:field="*{id}">
+
+            <label for="nombre">Nombre de la Categoría:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
+            
+            <button type="submit">Guardar Cambios</button>
+            <a th:href="@{/admin/categorias}">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

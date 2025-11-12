@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Carrito | AlphaBike</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"> </head>
+<body>
+    <div class="container">
+        <h2>Tu Carrito de Compras</h2>
+
+        <div th:if="${items.isEmpty()}" class="alert alert-info">
+            Tu carrito está vacío. ¡Añade algunas bicicletas!
+        </div>
+
+        <table th:unless="${items.isEmpty()}" class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Marca</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.producto.nombre}"></td>
+                    <td th:text="${item.producto.marca.nombre}"></td>
+                    <td th:text="${#numbers.formatCurrency(item.producto.precio)}"></td>
+                    <td th:text="${item.cantidad}"></td>
+                    <td th:text="${#numbers.formatCurrency(item.subtotal)}"></td>
+                    <td>
+                        <a th:href="@{/carrito/delete/{id}(id=${item.producto.id})}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align: right;"><strong>TOTAL:</strong></td>
+                    <td th:text="${#numbers.formatCurrency(total)}"></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div th:unless="${items.isEmpty()}" style="margin-top: 20px;">
+            <a th:href="@{/carrito/checkout}" class="btn btn-success">Proceder al Pago</a>
+            <a th:href="@{/}" class="btn btn-secondary">Continuar Comprando</a>
+        </div>
+    </div>
+</body>
+</html>

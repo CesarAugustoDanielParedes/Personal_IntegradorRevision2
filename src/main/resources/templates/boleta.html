@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Boleta No. ' + ${pedido.numero} + ' | AlphaBike'"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container" style="max-width: 700px; margin-top: 30px;">
+        <h2>🛒 ¡Gracias por tu compra en AlphaBike!</h2>
+        
+        <div class="boleta-header">
+            <h3>BOLETA DE VENTA</h3>
+            <p><strong>No. de Boleta:</strong> <span th:text="${pedido.numero}"></span></p>
+            <p><strong>Fecha:</strong> <span th:text="${#temporals.format(pedido.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></span></p>
+        </div>
+        
+        <hr>
+        
+        <h3>Datos del Cliente</h3>
+        <p><strong>Nombre:</strong> <span th:text="${pedido.cliente.nombre} + ' ' + ${pedido.cliente.apellido}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${pedido.cliente.email}"></span></p>
+        <p><strong>Dirección de Envío:</strong> <span th:text="${pedido.cliente.direccion}"></span></p>
+        
+        <h3>Detalles de la Compra</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detalle : ${pedido.detalles}">
+                    <td th:text="${detalle.nombre}"></td>
+                    <td th:text="${detalle.cantidad}"></td>
+                    <td th:text="${#numbers.formatCurrency(detalle.precio)}"></td>
+                    <td th:text="${#numbers.formatCurrency(detalle.total)}"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="text-align: right;"><strong>TOTAL FINAL:</strong></td>
+                    <td th:text="${#numbers.formatCurrency(pedido.total)}"></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <div class="alert alert-info">
+            La confirmación y detalles del pedido también han sido enviados a tu correo electrónico.
+        </div>
+
+        <a th:href="@{/}">Volver a Inicio</a>
+    </div>
+</body>
+</html>

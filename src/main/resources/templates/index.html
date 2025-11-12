@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AlphaBike - Venta de Bicicletas y Accesorios</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    
+    <div th:replace="~{fragments/header :: main-header}"></div>
+    
+    <main>
+        <div class="hero">
+            <video autoplay muted loop class="hero-video">
+                <source th:src="@{/media/hero_bike.mp4}" type="video/mp4"> 
+                Tu navegador no soporta el tag de video.
+            </video>
+            <div class="hero-text">
+                <h1>DOMINA LA RUTA</h1>
+                <p>Encuentra bicicletas de las mejores marcas y accesorios.</p>
+                <a th:href="@{/productos}" class="btn btn-red">Ver Productos</a>
+            </div>
+        </div>
+
+        <section class="section-padded">
+            <h2 class="section-title">Productos Destacados</h2>
+            <div class="product-carousel-wrapper">
+                <div class="product-carousel-container" id="productosDestacados">
+                    
+                    <div th:if="${#lists.isEmpty(productosDestacados)}" style="text-align: center; width: 100%; padding: 20px;">
+                        <p>No hay productos destacados disponibles todavía. ¡Crea algunos en el Panel Admin!</p>
+                    </div>
+
+                    <div class="product-card" th:each="producto : ${productosDestacados}">
+                        <a th:href="@{/productos/{id}(id=${producto.id})}">
+                            <img th:src="@{/images/productos/{img}(img=${producto.imagen})}" th:alt="${producto.nombre}">
+                            
+                            <h3><span th:text="${producto.nombre}"></span></h3>
+                            
+                            <p>Marca: <strong th:text="${producto.marca?.nombre}">Sin Marca</strong></p>
+                            
+                            <p class="price" th:text="${#numbers.formatCurrency(producto.precio)}"></p>
+                        </a>
+                        
+                        <button class="btn btn-red btn-add-to-cart" 
+                                th:data-product-id="${producto.id}"
+                                th:onclick="|location.href='@{/productos/{id}(id=${producto.id})}'|">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+
+                </div>
+                <button class="carousel-control prev-product" aria-label="Anterior Producto"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-control next-product" aria-label="Siguiente Producto"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section class="section-padded bg-light">
+            <h2 class="section-title">Navega por Categorías</h2>
+            <div class="brands-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                
+                <div th:if="${#lists.isEmpty(categoriasPrincipales)}" style="text-align: center; width: 100%; padding: 20px;">
+                    <p>No hay categorías configuradas.</p>
+                </div>
+                
+                <a th:each="categoria : ${categoriasPrincipales}" th:href="@{/productos(categoriaId=${categoria.id})}" class="brand-item">
+                    <img th:src="@{/images/categorias/{img}(img=${categoria.imagenLogo ?: 'placeholder.png'})}" th:alt="${categoria.nombre}" style="filter: none;">
+                    <p style="margin-top: 10px; font-weight: bold;" th:text="${categoria.nombre}"></p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section-padded">
+            <h2 class="section-title">Nuestras Marcas Exclusivas</h2>
+            <div class="brands-grid">
+                 
+                <div th:if="${#lists.isEmpty(marcasPrincipales)}" style="text-align: center; width: 100%; padding: 20px;">
+                    <p>No hay marcas configuradas.</p>
+                </div>
+                 
+                <a th:href="@{/productos(marcaId=${marca.id})}" th:each="marca : ${marcasPrincipales}" class="brand-item">
+                    <img th:src="@{/images/marcas/{logo}(logo=${marca.logo ?: 'placeholder.png'})}" th:alt="${marca.nombre}">
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div th:replace="~{fragments/footer :: main-footer}"></div> 
+    
+    <script th:src="@{/js/main.js}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleElement = document.querySelector('.user-dropdown-toggle');
+            const dropdown = document.getElementById('userDropdown');
+
+            if (toggleElement && dropdown) {
+                toggleElement.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                    dropdown.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (toggleElement && !toggleElement.contains(e.target)) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

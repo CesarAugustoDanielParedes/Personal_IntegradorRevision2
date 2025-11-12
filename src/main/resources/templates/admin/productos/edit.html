@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Editar Producto: ' + ${producto.nombre} + ' | AlphaBike Admin'"></title> 
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <div class="container">
+        <h2 th:text="'Editar Producto: ' + ${producto.nombre}">Editar Producto</h2>
+
+        <form th:action="@{/admin/productos/save}" method="post" th:object="${producto}" enctype="multipart/form-data">
+
+            <input type="hidden" th:field="*{id}">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" th:field="*{descripcion}" required></textarea>
+
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" th:field="*{precio}" step="0.01" required>
+            
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" th:field="*{stock}" required>
+            
+            <label>Imagen Actual:</label>
+            <div th:if="*{imagen != null and !*{imagen.isEmpty()}}">
+                <img th:src="@{/images/productos/{img}(img=*{imagen})}" alt="Imagen Actual" width="100">
+            </div>
+            
+            <label for="imagen">Cambiar Imagen:</label>
+            <input type="file" id="imagen" name="file" accept="image/*">
+            <input type="hidden" th:field="*{imagen}"> 
+
+            <button type="submit">Guardar Cambios</button>
+            <a th:href="@{/admin/productos}">Cancelar</a>
+        </form>
+        
+    <label for="marca">Marca:</label>
+            <select id="marca" th:field="*{marca}" required>
+                <option value="">Seleccione una Marca</option> 
+                <option th:each="marcaItem : ${marcas}" 
+                        th:value="${marcaItem.id}" 
+                        th:text="${marcaItem.nombre}">
+                    Marca Ejemplo
+                </option>
+            </select>
+
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" th:field="*{categoria}" required>
+                <option value="">Seleccione una Categoría</option>
+                <option th:each="categoriaItem : ${categorias}" 
+                        th:value="${categoriaItem.id}" 
+                        th:text="${categoriaItem.nombre}">
+                    Categoría Ejemplo
+                </option>
+            </select>
+            
+            <button type="submit">Guardar Cambios</button>
+            <a th:href="@{/admin/productos}">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

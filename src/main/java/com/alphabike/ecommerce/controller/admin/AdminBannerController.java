@@ -1,11 +1,17 @@
 package com.alphabike.ecommerce.controller.admin;
 
-import com.alphabike.ecommerce.model.Banner;
-import com.alphabike.ecommerce.service.BannerService;
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alphabike.ecommerce.model.Banner;
+import com.alphabike.ecommerce.service.BannerService;
 
 @Controller
 @RequestMapping("/admin/banners")
@@ -27,7 +33,7 @@ public class AdminBannerController {
     }
     
     // 2. MOSTRAR FORMULARIO DE CREACIÓN
-    @GetMapping("/create")
+    @GetMapping("/new")
     public String create(Model model) {
         model.addAttribute("banner", new Banner());
         model.addAttribute("pageTitle", "Crear Banner");

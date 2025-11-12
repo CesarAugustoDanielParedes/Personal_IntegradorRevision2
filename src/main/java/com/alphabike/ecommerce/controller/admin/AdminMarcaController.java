@@ -1,10 +1,15 @@
 package com.alphabike.ecommerce.controller.admin;
 
-import com.alphabike.ecommerce.model.Marca;
-import com.alphabike.ecommerce.service.MarcaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alphabike.ecommerce.model.Marca;
+import com.alphabike.ecommerce.service.MarcaService;
 
 @Controller
 @RequestMapping("/admin/marcas") 
@@ -27,7 +32,7 @@ public class AdminMarcaController {
     }
     
     // 2. MOSTRAR FORMULARIO DE CREACIÓN
-    @GetMapping("/create")
+    @GetMapping("/new")
     public String create(Model model) {
         model.addAttribute("marca", new Marca());
         model.addAttribute("pageTitle", "Crear Marca");

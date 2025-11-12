@@ -2,12 +2,12 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Banner | AlphaBike Admin</title>
+    <title th:text="${pageTitle}">Crear Banner</title>
     <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
     <div class="container">
-        <h2>Crear Nuevo Banner</h2>
+        <h2 th:text="${pageTitle}">Crear Nuevo Banner</h2>
 
         <form th:action="@{/admin/banners/save}" method="post" th:object="${banner}">
             
@@ -16,13 +16,13 @@
             <label for="titulo">Título:</label>
             <input type="text" id="titulo" th:field="*{titulo}" required>
 
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+            <label for="urlImagen">URL o Ruta de Imagen:</label>
+            <input type="text" id="urlImagen" th:field="*{urlImagen}" required>
             
-            <label for="imagenUrl">URL o Ruta de Imagen:</label>
-            <input type="text" id="imagenUrl" th:field="*{imagenUrl}" required>
-            
-            <label for="orden">Orden (Prioridad 1 es el primero):</label>
+            <label for="enlaceDestino">Enlace Destino:</label>
+            <input type="text" id="enlaceDestino" th:field="*{enlaceDestino}" placeholder="https://...">
+
+            <label for="orden">Orden (1 = primero):</label>
             <input type="number" id="orden" th:field="*{orden}" min="1" required>
             
             <button type="submit">Guardar Banner</button>

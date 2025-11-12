@@ -1,7 +1,7 @@
 <div th:fragment="content">
     <h2 th:text="${pageTitle}">Gestión de Marcas</h2>
     <div style="margin-bottom: 20px;">
-        <a th:href="@{/admin/marcas/create}" class="btn-activate" style="text-decoration: none;">+ Añadir Nueva Marca</a>
+        <a th:href="@{/admin/marcas/new}" class="btn-activate" style="text-decoration: none;">+ Añadir Nueva Marca</a>
     </div>
 
     <table class="table">
@@ -14,8 +14,8 @@
         </thead>
         <tbody>
             <tr th:each="marca : ${marcas}">
-                <td th:text="${marca.id}">1</td>
-                <td th:text="${marca.nombre}">Cannondale</td>
+                <td th:text="${marca.id}"></td>
+                <td th:text="${marca.nombre}"></td>
                 <td class="action-buttons">
                     <a th:href="@{/admin/marcas/edit/{id}(id=${marca.id})}" class="btn-edit">Editar</a>
                     <a th:href="@{/admin/marcas/delete/{id}(id=${marca.id})}" class="btn-delete">Eliminar</a>

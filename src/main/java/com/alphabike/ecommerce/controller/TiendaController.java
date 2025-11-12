@@ -1,10 +1,10 @@
 package com.alphabike.ecommerce.controller;
 
-import com.alphabike.ecommerce.model.Producto;
-import com.alphabike.ecommerce.service.ProductoService;
-import com.alphabike.ecommerce.service.MarcaService;
-import com.alphabike.ecommerce.service.CategoriaService;
-import com.alphabike.ecommerce.service.BannerService;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import com.alphabike.ecommerce.model.Producto;
+import com.alphabike.ecommerce.service.BannerService;
+import com.alphabike.ecommerce.service.CategoriaService;
+import com.alphabike.ecommerce.service.MarcaService;
+import com.alphabike.ecommerce.service.ProductoService;
 
 @Controller
 public class TiendaController {
@@ -34,7 +35,7 @@ public class TiendaController {
     }
 
     // Ruta: / (Página de Inicio)
-    @GetMapping("/")
+    @GetMapping("/index")
     public String home(Model model) {
         
         // Carga los primeros 8 productos para la sección de destacados

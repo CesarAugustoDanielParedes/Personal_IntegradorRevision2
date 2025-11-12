@@ -1,6 +1,39 @@
 <html th:replace="~{fragments/admin_layout :: layout(
-    pageTitle='Gestión de Pedidos', 
-    activeMenu='pedidos', 
-    contentFragment=~{admin/pedidos/pedidos_list :: content}
+    pageTitle='Gestión de Pedidos',
+    activeMenu='pedidos',
+    contentFragment=~{admin/pedidos/home :: content}
 )}">
+
+<div th:fragment="content">
+    <h2>Gestión de Pedidos</h2>
+    <p>Listado de todos los pedidos registrados en el sistema.</p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${pedidos}">
+                <td th:text="${p.id}">1</td>
+                <td th:text="${p.cliente.nombre}">Juan Pérez</td>
+                <td th:text="${#dates.format(p.fecha, 'dd/MM/yyyy')}">12/11/2025</td>
+                <td th:text="${p.total}">250.00</td>
+                <td th:text="${p.estado}">Pendiente</td>
+                <td>
+                    <a th:href="@{/admin/pedidos/detalle/{id}(id=${p.id})}">Ver</a> |
+                    <a th:href="@{/admin/pedidos/delete/{id}(id=${p.id})}"
+                       onclick="return confirm('¿Seguro que deseas eliminar este pedido?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 </html>

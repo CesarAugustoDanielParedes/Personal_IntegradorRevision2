@@ -1,0 +1,40 @@
+<html th:replace="~{fragments/admin_layout :: layout(
+    pageTitle='Gestión de Clientes', 
+    activeMenu='clientes', 
+    contentFragment=~{admin/clientes/home :: content}
+)}">
+
+<!-- 🔹 Fragmento que será insertado en el layout -->
+<div th:fragment="content">
+    <h2>Gestión de Clientes</h2>
+    <p>Listado de todos los clientes registrados en el sistema.</p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${clientes}">
+                <td th:text="${c.id}">1</td>
+                <td th:text="${c.nombre}">Juan Pérez</td>
+                <td th:text="${c.email}">juan@mail.com</td>
+                <td th:text="${c.telefono}">999999999</td>
+                <td th:text="${c.direccion}">Av. Lima 123</td>
+                <td>
+                    <a th:href="@{/admin/clientes/edit/{id}(id=${c.id})}">Editar</a> |
+                    <a th:href="@{/admin/clientes/delete/{id}(id=${c.id})}"
+                       onclick="return confirm('¿Seguro que deseas eliminar este cliente?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</html>

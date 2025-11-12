@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    th:fragment="layout(pageTitle, activeMenu, contentFragment)">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +25,8 @@
             </header>
             
             <div class="content-area" id="contentArea">
-                <div th:replace="${contentFragment}"></div>
+                <div th:insert="${contentFragment}"></div>
+
             </div>
         </main>
     </div>

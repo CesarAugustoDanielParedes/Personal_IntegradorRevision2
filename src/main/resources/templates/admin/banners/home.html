@@ -1,6 +1,41 @@
 <html th:replace="~{fragments/admin_layout :: layout(
     pageTitle='Gestión de Banners', 
     activeMenu='banners', 
-    contentFragment=~{admin/banners/banners_list :: content}
+    contentFragment=~{admin/banners/home :: content}
 )}">
+
+<div th:fragment="content">
+    <h2>Gestión de Banners</h2>
+    <p>Aquí puedes ver, agregar o eliminar los banners del sitio.</p>
+
+    <a th:href="@{/admin/banners/new}" class="btn-agregar">+ Nuevo Banner</a>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Imagen</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="b : ${banners}">
+                <td th:text="${b.id}">1</td>
+                <td th:text="${b.titulo}">Banner Principal</td>
+                <td>
+                    <img th:src="@{/uploads/banners/{img}(img=${b.imagen})}" alt="Imagen Banner" width="120">
+                </td>
+                <td th:text="${b.activo ? 'Sí' : 'No'}">Sí</td>
+                <td>
+                    <a th:href="@{/admin/banners/edit/{id}(id=${b.id})}">Editar</a> |
+                    <a th:href="@{/admin/banners/delete/{id}(id=${b.id})}"
+                       onclick="return confirm('¿Seguro que deseas eliminar este banner?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 </html>
